@@ -1,0 +1,58 @@
+version: "3.9"
+services:
+# unit test - appender - rabbit
+# unit test - appender - SQS
+  test:
+    hostname: "test"
+    image: "node"
+    working_dir: "/app"
+    # stdin_open: true
+    # tty: true
+    volumes:
+      - ./app:/app:ro
+    # environment:
+    command: [
+        "./node_modules/yarn/bin/yarn",
+        "test"
+    ]
+    depends_on:
+      - appender
+  appender:
+    hostname: "appender"
+    image: "node"
+    working_dir: "/app"
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./app:/app:ro
+    # environment:
+    command: [
+        "./node_modules/yarn/bin/yarn",
+        "start"
+    ]
+    # depends_on:
+    #   - rabbit
+    # profiles:
+    #   - appender
+    #   - rabbit
+  appender-sqs:
+    hostname: "appender"
+    image: "myappender"
+    build: ./
+    environment:
+      DB_URL: 'ampq://rabbit'
+      RABBIT_ARG1: 'asdf'
+    volumes:
+      - ./app:/app:ro
+    command: [
+        "./node_modules/nodemon/bin/nodemon",
+        "yarn run"
+    ]
+    # profiles:
+    #   - appender
+    #   - sqs
+  rabbit:
+    hostname: "rabbit"
+    image: "hello-world"
+    profiles:
+      - bar

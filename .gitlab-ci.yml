@@ -1,0 +1,56 @@
+variables:
+  POSTGRES_DB: sample-test
+  POSTGRES_HOST_AUTH_METHOD: trust
+  DATABASE_URL: "postgresql://postgres@postgres:5432/sample-test"
+
+# services:
+#   - postgres:11
+
+# GIT PULL
+# git pull
+
+# YARN INSTALL
+# yarn install
+
+# START SIDE CONTAINER
+# docker compose run redis
+
+# CONFIG SIDE CONTAINER
+# config side container
+
+# START TARGET CONTAINER
+# docker compose run target
+
+# START TEST CONTAINER
+# docker compose run test
+
+stages:
+  - test
+
+job_01:
+  stage: test
+  script:
+    - docker compose run test
+  # tags:
+  #   - ruby
+
+job_02:
+  stage: test
+  script:
+    - docker compose run appender
+
+job_03:
+  stage: build
+  script:
+    - echo "Hello, $GITLAB_USER_LOGIN!"
+
+job_04:
+  stage: test
+  script:
+    - echo "This job tests something"
+
+job_05:
+  stage: deploy
+  script:
+    - echo "This job deploys something from the $CI_COMMIT_BRANCH branch."
+  environment: production
