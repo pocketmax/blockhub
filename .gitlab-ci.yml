@@ -30,27 +30,27 @@ stages:
 job_01:
   stage: test
   script:
-    - docker compose run test
+    - ls /
   # tags:
   #   - ruby
 
-job_02:
-  stage: test
-  script:
-    - docker compose run appender
+# job_02:
+#   stage: test
+#   script:
+#     - docker compose run appender
 
-job_03:
-  stage: build
-  script:
-    - echo "Hello, $GITLAB_USER_LOGIN!"
+# job_03:
+#   stage: build
+#   script:
+#     - echo "Hello, $GITLAB_USER_LOGIN!"
 
-job_04:
-  stage: test
-  script:
-    - echo "This job tests something"
+# job_04:
+#   stage: test
+#   script:
+#     - echo "This job tests something"
 
-job_05:
-  stage: deploy
-  script:
-    - echo "This job deploys something from the $CI_COMMIT_BRANCH branch."
-  environment: production
+# job_05:
+#   stage: deploy
+#   script:
+#     - echo "This job deploys something from the $CI_COMMIT_BRANCH branch."
+#   environment: production
