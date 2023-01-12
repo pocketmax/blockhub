@@ -26,13 +26,25 @@ variables:
 
 stages:
   - test
+  - test2
+  - test3
 
 job_01:
   stage: test
   script:
-    - ls /
+    - ls /tmp
   # tags:
   #   - ruby
+
+job_02:
+  stage: test2
+  script:
+    - exit 1
+
+job_03:
+  stage: test3
+  script:
+    - ping -c 3 www.google.com
 
 # job_02:
 #   stage: test
