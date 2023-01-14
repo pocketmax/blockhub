@@ -25,14 +25,37 @@ variables:
 # docker compose run test
 
 stages:
-  - test
+  - long
+  - srv
   - test3
   - test4
 
 job_01:
-  stage: test
+  stage: long
   script:
-    - ls /tmp
+    - ping -c 10 www.google.com
+
+job_02:
+  stage: long
+  script:
+    - ping -c 15 www.yahoo.com
+
+# services
+job_04:
+  stage: srv
+  services:
+    - name: my-postgres:11.7
+      alias: db-postgres
+      entrypoint: ["/usr/local/bin/db-postgres"]
+      command: ["start"]
+  script:
+    - ping -c 10 db-postgres
+
+
+# job_01a:
+#   stage: build
+#   script:
+#     - ls /tmp
   # tags:
   #   - ruby
 
@@ -41,21 +64,7 @@ job_01:
 #   script:
 #     - exit 1
 
-job_03:
-  stage: test
-  script:
-    - ping -c 3 www.google.com
 
-# start service
-job_04:
-  stage: test4
-  services:
-    - name: my-postgres:11.7
-      alias: db-postgres
-      entrypoint: ["/usr/local/bin/db-postgres"]
-      command: ["start"]
-  script:
-    - ls
 
 # job_02:
 #   stage: test
