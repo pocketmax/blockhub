@@ -25,8 +25,8 @@ variables:
 # docker compose run test
 
 stages:
-  - long
   - srv
+  - long
   - test3
   - test4
 
@@ -46,10 +46,8 @@ job_04:
   services:
     - name: postgres
       alias: db-postgres
-      entrypoint: ["/usr/local/bin/db-postgres"]
-      command: ["start"]
   script:
-    - ping -c 10 db-postgres
+    - docker ps -a
 
 
 # job_01a:
