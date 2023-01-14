@@ -44,7 +44,7 @@ job_02:
 job_04:
   stage: srv
   services:
-    - name: my-postgres:11.7
+    - name: postgres
       alias: db-postgres
       entrypoint: ["/usr/local/bin/db-postgres"]
       command: ["start"]
