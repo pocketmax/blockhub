@@ -32,7 +32,7 @@ stages:
 
 job_02a:
   stage: dock
-  image: postgresd
+  image: alpine:3.7
   script:
     - ls # run in container
 
