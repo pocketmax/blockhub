@@ -51,7 +51,10 @@ job_03:
 job_04:
   stage: test4
   services:
-    - tutum/wordpress:latest
+    - name: my-postgres:11.7
+      alias: db-postgres
+      entrypoint: ["/usr/local/bin/db-postgres"]
+      command: ["start"]
   script:
     - ls
 
