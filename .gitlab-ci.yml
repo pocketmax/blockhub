@@ -25,10 +25,16 @@ variables:
 # docker compose run test
 
 stages:
-  - srv
+  - dock
   - long
-  - test3
+  - srv
   - test4
+
+job_02a:
+  stage: dock
+  image: postgres
+  script:
+    - ls # run in container
 
 job_01:
   stage: long
