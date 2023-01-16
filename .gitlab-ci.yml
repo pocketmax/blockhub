@@ -127,10 +127,10 @@ b2:
     - echo $BUILD_ID
     - typeset -p BUILD_ID > ./variables.env
 
-b1a:
-  stage: b
-  script:
-    - ping -c 5 www.google.com
+# b1a:
+#   stage: b
+#   script:
+#     - ping -c 5 www.google.com
 
 # services
 # job_04:
