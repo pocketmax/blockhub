@@ -95,8 +95,8 @@ b1:
   #   key: "$CI_PIPELINE_ID"
   #   paths:
   #     - ./*.env
-  # dependencies:
-  #   - b2
+  dependencies:
+    - b2
   script:
     # restore variables
     # - export BAR="/Users/max/IdeaProjects/monorepos/zion/projects"
