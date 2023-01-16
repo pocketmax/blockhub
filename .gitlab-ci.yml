@@ -108,11 +108,11 @@ b1:
     # - export BAR="/Users/max/IdeaProjects/monorepos/zion/projects"
     - pwd
     # - ls "$(BAR)"
-    - ls "$PWD"
-    - ls -la "$PWD"
+    # - ls "$PWD"
+    - ls -la ./
     # - env
-    - cat "$PWD/variables.env"
-    - source "$PWD/variables.env"
+    - cat ./variables.env
+    - source ./variables.env
     - echo "$PWD"
     - echo $BUILD_ID
 
@@ -135,9 +135,9 @@ b2:
     - echo $BUILD_ID
     - echo $CI_BUILD_REF_NAME
     - export -p BUILD_ID > ./variables.env
-    - cat ./variables.env
-    - ls ./
-    - ls "$PWD"
+    # - cat ./variables.env
+    - ls -la ./
+    # - ls "$PWD"
 
 
 # pass a variable from one job to another
