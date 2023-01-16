@@ -143,9 +143,9 @@ b2:
 c1:
   stage: c
   # image: node:19-alpine3.16
-  artifacts:
-  # cache:
-    # key: "$CI_PIPELINE_ID"
+  # artifacts:
+  cache:
+    key: "$CI_PIPELINE_ID"
     paths:
       - ./scripts/variables.env
   dependencies:
@@ -157,9 +157,9 @@ c1:
 c2:
   stage: c
   # image: node:19-alpine3.16
-  artifacts:
-  # cache:
-    # key: "$CI_PIPELINE_ID"
+  # artifacts:
+  cache:
+    key: "$CI_PIPELINE_ID"
     paths:
       - ./scripts/variables.env
   script:
