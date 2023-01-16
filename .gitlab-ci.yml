@@ -143,41 +143,41 @@ b2:
 
 
 # pass a variable from one job to another
-c1:
-  stage: order2
-  # image: node:19-alpine3.16
-  # artifacts:
-  cache:
-    untracked: true 
-    unprotect: true
-    # key: "$CI_PIPELINE_ID"
-    key: "$CI_BUILD_REF_NAME"
-    when: 'always'
-    policy: pull
-    paths:
-      - ./variables.env
-  dependencies:
-    - c2
-  script:
-    - cat ./variables.env
+# c1:
+#   stage: order2
+#   # image: node:19-alpine3.16
+#   # artifacts:
+#   cache:
+#     untracked: true 
+#     unprotect: true
+#     # key: "$CI_PIPELINE_ID"
+#     key: "$CI_BUILD_REF_NAME"
+#     when: 'always'
+#     policy: pull
+#     paths:
+#       - ./variables.env
+#   dependencies:
+#     - c2
+#   script:
+#     - cat ./variables.env
 
 
-# pass a variable from one job to another
-c2:
-  stage: order1
-  # image: node:19-alpine3.16
-  # artifacts:
-  cache:
-    untracked: true 
-    unprotect: true
-    # key: "$CI_PIPELINE_ID"
-    key: "$CI_BUILD_REF_NAME"
-    when: 'always'
-    policy: push
-    paths:
-      - ./variables.env
-  script:
-    - echo "testing456" > ./variables.env
+# # pass a variable from one job to another
+# c2:
+#   stage: order1
+#   # image: node:19-alpine3.16
+#   # artifacts:
+#   cache:
+#     untracked: true 
+#     unprotect: true
+#     # key: "$CI_PIPELINE_ID"
+#     key: "$CI_BUILD_REF_NAME"
+#     when: 'always'
+#     policy: push
+#     paths:
+#       - ./variables.env
+#   script:
+#     - echo "testing456" > ./variables.env
 
 
 # b1a:
