@@ -102,7 +102,7 @@ b1:
     # key: "$CI_PIPELINE_ID"
     key: "$CI_BUILD_REF_NAME"
     paths:
-      - ./variables.env
+      - ./variables2.env
   dependencies:
     - b2
   script:
@@ -113,8 +113,8 @@ b1:
     # - ls "$PWD"
     - ls -la ./
     # - env
-    - cat ./variables.env
-    - source ./variables.env
+    - cat ./variables2.env
+    - source ./variables2.env
     - echo "$PWD"
     - echo $BUILD_ID
 
@@ -125,7 +125,7 @@ b2:
     untracked: true 
     key: "$CI_BUILD_REF_NAME"
     paths:
-      - ./variables.env
+      - ./variables2.env
   variables:
     CI_DEBUG_SERVICES: "true" # show service logs
     FF_NETWORK_PER_BUILD: "true"  # need this for script to talk to services
@@ -136,7 +136,7 @@ b2:
     - docker info
     - echo $BUILD_ID
     - echo $CI_BUILD_REF_NAME
-    - export -p BUILD_ID > ./variables.env
+    - export -p BUILD_ID > ./variables2.env
     # - cat ./variables.env
     - ls -la ./
     # - ls "$PWD"
