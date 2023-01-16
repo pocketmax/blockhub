@@ -132,13 +132,13 @@ b1a:
     - ping -c 5 www.google.com
 
 # services
-job_04:
-  stage: srv
-  services:
-    - name: postgres
-      alias: db-postgres
-  script:
-    - docker ps -a
+# job_04:
+#   stage: srv
+#   services:
+#     - name: postgres
+#       alias: db-postgres
+#   script:
+#     - docker ps -a
 
 
 # job_01a:
