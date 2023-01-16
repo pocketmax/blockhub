@@ -1,4 +1,4 @@
-FROM node:12-alpine
+FROM node:19-alpine3.16
 RUN apk update && apk upgrade
 
 RUN mkdir /app
