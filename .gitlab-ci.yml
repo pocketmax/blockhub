@@ -125,9 +125,11 @@ b2:
     - export BUILD_ID=`docker build --quiet -t myapp .`
     # - ls "$BAR/blockhub"
     - echo $BUILD_ID
+    - echo $CI_PIPELINE_ID
     - export -p BUILD_ID > ./variables.env
     - ls ./
     - ls "$PWD"
+    - cat ./variables.env
 
 # b1a:
 #   stage: b
