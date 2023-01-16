@@ -156,6 +156,7 @@ c1:
   script:
     - cat ./variables.env
 
+
 # pass a variable from one job to another
 c2:
   stage: c
