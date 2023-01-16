@@ -139,6 +139,7 @@ b2:
     - ls ./
     - ls "$PWD"
 
+
 # pass a variable from one job to another
 c1:
   stage: c
