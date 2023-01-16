@@ -7,6 +7,7 @@
 
 # services:
 #   - postgres:11
+# docker run --rm --name etcd -p 2379:2379 -p 4001:4001 -d quay.io/coreos/etcd:v2.3.8 -name etcd0 -advertise-client-urls http://164.92.127.139:2379 -listen-client-urls http://0.0.0.0:2379,http://0.0.0.0:4001
 
 # GIT PULL
 # git pull
@@ -147,8 +148,11 @@ c1:
   # artifacts:
   cache:
     untracked: true 
+    unprotect: true
     # key: "$CI_PIPELINE_ID"
     key: "$CI_BUILD_REF_NAME"
+    when: 'always'
+    policy: pull
     paths:
       - ./variables.env
   dependencies:
@@ -163,9 +167,12 @@ c2:
   # image: node:19-alpine3.16
   # artifacts:
   cache:
-    untracked: true
+    untracked: true 
+    unprotect: true
     # key: "$CI_PIPELINE_ID"
     key: "$CI_BUILD_REF_NAME"
+    when: 'always'
+    policy: push
     paths:
       - ./variables.env
   script:
