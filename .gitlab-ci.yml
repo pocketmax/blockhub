@@ -147,11 +147,11 @@ c1:
   cache:
     key: "$CI_PIPELINE_ID"
     paths:
-      - ./scripts/variables.env
+      - ./variables.env
   dependencies:
     - c2
   script:
-    - cat ./scripts/variables.env
+    - cat ./variables.env
 
 # pass a variable from one job to another
 c2:
@@ -161,9 +161,9 @@ c2:
   cache:
     key: "$CI_PIPELINE_ID"
     paths:
-      - ./scripts/variables.env
+      - ./variables.env
   script:
-    - echo "testing123" > ./scripts/variables.env
+    - echo "testing123" > ./variables.env
 
 
 # b1a:
