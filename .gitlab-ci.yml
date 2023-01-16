@@ -124,6 +124,7 @@ b2:
   script:
     - export BUILD_ID=`docker build --quiet -t myapp .`
     # - ls "$BAR/blockhub"
+    - docker info
     - echo $BUILD_ID
     - echo $CI_PIPELINE_ID
     - export -p BUILD_ID > ./variables.env
