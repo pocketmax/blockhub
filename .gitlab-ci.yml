@@ -146,6 +146,7 @@ c1:
   # image: node:19-alpine3.16
   # artifacts:
   cache:
+    untracked: true
     # key: "$CI_PIPELINE_ID"
     key: "$CI_BUILD_REF_NAME"
     paths:
@@ -161,6 +162,7 @@ c2:
   # image: node:19-alpine3.16
   # artifacts:
   cache:
+    untracked: true
     # key: "$CI_PIPELINE_ID"
     key: "$CI_BUILD_REF_NAME"
     paths:
