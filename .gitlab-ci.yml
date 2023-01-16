@@ -73,6 +73,7 @@ a3:
 
 # TODO: build an image via docker in docker (dind)
 a4:
+  stage: a
   image: docker:20.10.16
   variables:
     CI_DEBUG_SERVICES: "true" # show service logs
