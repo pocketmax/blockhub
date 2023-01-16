@@ -30,9 +30,9 @@
 # usermod -aG docker gitlab-runner
 
 stages:
-  # - b
-  # - a
   - c
+  - b
+  - a
   - srv
   - test4
 # gitlab-runner exec docker a1
