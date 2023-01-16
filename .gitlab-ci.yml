@@ -30,8 +30,8 @@
 # usermod -aG docker gitlab-runner
 
 stages:
-  - b
   - c
+  - b
   - a
   - srv
   - test4
@@ -169,7 +169,7 @@ c2:
     paths:
       - ./variables.env
   script:
-    - echo "testing123" > ./variables.env
+    - echo "testing456" > ./variables.env
 
 
 # b1a:
