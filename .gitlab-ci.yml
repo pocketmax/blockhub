@@ -31,7 +31,8 @@
 # usermod -aG docker gitlab-runner
 
 stages:
-  - c
+  - order1
+  - order2
   - b
   - a
   - srv
@@ -143,7 +144,7 @@ b2:
 
 # pass a variable from one job to another
 c1:
-  stage: c
+  stage: order2
   # image: node:19-alpine3.16
   # artifacts:
   cache:
@@ -163,7 +164,7 @@ c1:
 
 # pass a variable from one job to another
 c2:
-  stage: c
+  stage: order1
   # image: node:19-alpine3.16
   # artifacts:
   cache:
