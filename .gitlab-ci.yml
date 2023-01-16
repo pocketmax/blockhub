@@ -30,8 +30,8 @@
 # usermod -aG docker gitlab-runner
 
 stages:
-  - c
   - b
+  - c
   - a
   - srv
   - test4
@@ -109,11 +109,12 @@ b1:
     - pwd
     # - ls "$(BAR)"
     - ls "$PWD"
+    - ls -la "$PWD"
     # - env
     - cat "$PWD/variables.env"
     - source "$PWD/variables.env"
     - echo "$PWD"
-    - echo "$BUILD_ID"
+    - echo $BUILD_ID
 
 b2:
   stage: b
