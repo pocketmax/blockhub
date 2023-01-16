@@ -27,8 +27,8 @@
 # docker compose run test
 
 stages:
-  - a
   - b
+  - a
   - srv
   - test4
 # gitlab-runner exec docker a1
