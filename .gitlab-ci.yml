@@ -26,9 +26,13 @@
 # START TEST CONTAINER
 # docker compose run test
 
+# run this if building docker containers fails for shell exec
+# usermod -aG docker gitlab-runner
+
 stages:
-  - b
-  - a
+  # - b
+  # - a
+  - c
   - srv
   - test4
 # gitlab-runner exec docker a1
@@ -131,9 +135,35 @@ b2:
     - echo $BUILD_ID
     - echo $CI_PIPELINE_ID
     - export -p BUILD_ID > ./variables.env
+    - cat ./variables.env
     - ls ./
     - ls "$PWD"
+
+# pass a variable from one job to another
+c1:
+  stage: c
+  # image: node:19-alpine3.16
+  cache:
+    key: "$CI_PIPELINE_ID"
+    paths:
+    # keep all env files between stages
+      - ./variables.env
+  dependencies:
+    - c2
+  script:
+    - echo "testing" > ./variables.env
+
+# pass a variable from one job to another
+c2:
+  stage: c
+  # image: node:19-alpine3.16
+  cache:
+    key: "$CI_PIPELINE_ID"
+    paths:
+      - ./variables.env
+  script:
     - cat ./variables.env
+
 
 # b1a:
 #   stage: b
