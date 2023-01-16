@@ -99,8 +99,11 @@ b1:
   # image: node:19-alpine3.16
   cache:
     untracked: true 
+    unprotect: true
     # key: "$CI_PIPELINE_ID"
     key: "$CI_BUILD_REF_NAME"
+    when: 'always'
+    policy: pull
     paths:
       - ./variables2.env
   dependencies:
@@ -123,7 +126,11 @@ b2:
   # image: node:19-alpine3.16
   cache:
     untracked: true 
+    unprotect: true
+    # key: "$CI_PIPELINE_ID"
     key: "$CI_BUILD_REF_NAME"
+    when: 'always'
+    policy: push
     paths:
       - ./variables2.env
   variables:
