@@ -122,6 +122,8 @@ b2:
   dependencies:
     - b2
   script:
+    - ls
+    - docker build .
     - export BUILD_ID=`docker build --quiet -t myapp .`
     # - ls "$BAR/blockhub"
     - docker info
