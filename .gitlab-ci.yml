@@ -90,11 +90,12 @@ a4:
 # have a built test container
 b1:
   stage: b
-  image: node:19-alpine3.16
-  # cache:
-  #   key: "$CI_PIPELINE_ID"
-  #   paths:
-  #     - ./*.env
+  # image: node:19-alpine3.16
+  cache:
+    key: "$CI_PIPELINE_ID"
+    paths:
+    # keep all env files between stages
+      - ./*.env
   dependencies:
     - b2
   script:
