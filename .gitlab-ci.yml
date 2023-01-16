@@ -110,7 +110,7 @@ b1:
 
 b2:
   stage: b
-  image: node:19-alpine3.16
+  # image: node:19-alpine3.16
   cache:
     key: "$CI_PIPELINE_ID"
     paths:
