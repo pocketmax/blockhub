@@ -148,7 +148,7 @@ c1:
   cache:
     untracked: true 
     # key: "$CI_PIPELINE_ID"
-   key: "$CI_BUILD_REF_NAME"
+    key: "$CI_BUILD_REF_NAME"
     paths:
       - ./variables.env
   dependencies:
