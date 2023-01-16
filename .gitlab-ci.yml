@@ -96,10 +96,11 @@ b1:
   stage: b
   # image: node:19-alpine3.16
   cache:
-    key: "$CI_PIPELINE_ID"
+    untracked: true 
+    # key: "$CI_PIPELINE_ID"
+    key: "$CI_BUILD_REF_NAME"
     paths:
-    # keep all env files between stages
-      - ./*.env
+      - ./variables.env
   dependencies:
     - b2
   script:
@@ -118,22 +119,20 @@ b2:
   stage: b
   # image: node:19-alpine3.16
   cache:
-    key: "$CI_PIPELINE_ID"
+    untracked: true 
+    key: "$CI_BUILD_REF_NAME"
     paths:
-    # keep all env files between stages
-      - ./*.env
+      - ./variables.env
   variables:
     CI_DEBUG_SERVICES: "true" # show service logs
     FF_NETWORK_PER_BUILD: "true"  # need this for script to talk to services
-  dependencies:
-    - b2
   script:
     - ls
     - export BUILD_ID=`docker build --quiet -t myapp .`
     # - ls "$BAR/blockhub"
     - docker info
     - echo $BUILD_ID
-    - echo $CI_PIPELINE_ID
+    - echo $CI_BUILD_REF_NAME
     - export -p BUILD_ID > ./variables.env
     - cat ./variables.env
     - ls ./
