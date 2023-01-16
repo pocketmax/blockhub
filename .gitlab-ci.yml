@@ -1,9 +1,9 @@
-image: postgresql:14.3
+# image: postgresql:14.3
 
-variables:
-  POSTGRES_DB: sample-test
-  POSTGRES_HOST_AUTH_METHOD: trust
-  DATABASE_URL: "postgresql://postgres@postgres:5432/sample-test"
+# variables:
+#   POSTGRES_DB: sample-test
+#   POSTGRES_HOST_AUTH_METHOD: trust
+#   DATABASE_URL: "postgresql://postgres@postgres:5432/sample-test"
 
 # services:
 #   - postgres:11
@@ -27,26 +27,109 @@ variables:
 # docker compose run test
 
 stages:
-  - dock
-  - long
+  - a
+  - b
   - srv
   - test4
-
-job_02a:
-  stage: dock
-  image: alpine:3.7
+# gitlab-runner exec docker a1
+a1:
+  stage: a
+  image: node:latest # runs commands in this docker container
+  # entrypoint: ["/bin/sh", "-c"]
   script:
-    - ls # run in container
+    - ls /Users
+    - echo testing > /Users/max/test.ing123 # works in container and doesn't persist on disk
+    # - node -v
+    - echo testing > /tmp/test.ing123
+    - ls -la /tmp/test.ing123
+    - node -v
 
-job_01:
-  stage: long
+# run with a service
+# gitlab-runner exec docker a2
+a2:
+  stage: a
+  image: alpine:latest # runs commands in this docker container
+  variables:
+    CI_DEBUG_SERVICES: "true" # show service logs
+    FF_NETWORK_PER_BUILD: "true"  # need this for script to talk to services
+  services:
+    - redis
+    # - name: redis
+    #   alias: db
+      # entrypoint: ["docker-entrypoint.sh"]
+      # command: ["postgres"]
   script:
-    - ping -c 10 www.google.com
+    - nslookup redis
+    - ping -c 5 redis
 
-job_02:
-  stage: long
+# build a container with a service
+# gitlab-runner exec shell a3
+a3:
+  stage: a
   script:
-    - ping -c 15 www.yahoo.com
+    - env
+    - pwd
+    - docker build --no-cache .
+
+# TODO: build an image via docker in docker (dind)
+a4:
+  image: docker:20.10.16
+  variables:
+    CI_DEBUG_SERVICES: "true" # show service logs
+    FF_NETWORK_PER_BUILD: "true"  # need this for script to talk to services
+  services:
+    - docker:20.10.16-dind
+  # before_script:
+  script:
+    - ping -c 10 docker
+    - nslookup docker
+    # - docker build -t my-docker-image .
+    # - docker run my-docker-image /script/to/run/tests
+
+# have a built test container
+b1:
+  stage: b
+  image: node:19-alpine3.16
+  # cache:
+  #   key: "$CI_PIPELINE_ID"
+  #   paths:
+  #     - ./*.env
+  # dependencies:
+  #   - b2
+  script:
+    # restore variables
+    # - export BAR="/Users/max/IdeaProjects/monorepos/zion/projects"
+    - pwd
+    # - ls "$(BAR)"
+    - ls "$PWD"
+    # - env
+    - source "$PWD/variables.env"
+    - echo "$PWD"
+    - echo "$BUILD_ID"
+
+b2:
+  stage: b
+  image: node:19-alpine3.16
+  cache:
+    key: "$CI_PIPELINE_ID"
+    paths:
+    # keep all env files between stages
+      - ./*.env
+  variables:
+    CI_DEBUG_SERVICES: "true" # show service logs
+    FF_NETWORK_PER_BUILD: "true"  # need this for script to talk to services
+  dependencies:
+    - b2
+  script:
+    - export BUILD_ID=`docker build --quiet -t myapp .`
+    # - ls "$BAR/blockhub"
+    - echo $BUILD_ID
+    - typeset -p BUILD_ID > ./variables.env
+
+b1a:
+  stage: b
+  script:
+    - ping -c 5 www.google.com
 
 # services
 job_04:
