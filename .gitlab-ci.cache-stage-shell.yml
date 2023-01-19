@@ -1,5 +1,5 @@
 # pass a variable from one job to another
-csd-1:
+css-1:
   # when: manual
   stage: cache-stage1-shell
   # image: node:19-alpine3.16
@@ -14,12 +14,12 @@ csd-1:
     paths:
       - ./cache-stage-shell.env
   dependencies:
-    - csd-1
+    - css-1
   script:
     - cat ./cache-stage-shell.env
 
 # # pass a variable from one job to another
-csd-2:
+css-2:
   # when: manual
   stage: cache-stage2-shell
   # image: node:19-alpine3.16
