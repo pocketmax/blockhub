@@ -10,7 +10,7 @@ cdd-1:
     # key: "$CI_PIPELINE_ID"
     key: "$CI_BUILD_REF_NAME"
     when: 'always'
-    policy: pull
+    # policy: pull
     paths:
       - ./cache-dep-dock.env
   dependencies:
@@ -30,7 +30,7 @@ cdd-2:
     # key: "$CI_PIPELINE_ID"
     key: "$CI_BUILD_REF_NAME"
     when: 'always'
-    policy: push
+    # policy: push
     paths:
       - ./cache-dep-dock.env
   script:
