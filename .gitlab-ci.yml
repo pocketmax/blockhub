@@ -36,6 +36,7 @@ include:
 stages:
   - cache-stage1-dock
   - cache-stage2-dock
+  - order1
   - order2
   - b
   - a
