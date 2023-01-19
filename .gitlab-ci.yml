@@ -40,8 +40,8 @@ stages:
   - cache-stage1-dock
   - cache-stage2-dock
 # cache via stage via shell exec
-  - cache-shell1-dock
-  - cache-shell2-dock
+  - cache-stage1-shell
+  - cache-stage2-shell
 # cache via dep via dock exec
   - cache-dep-dock
 
