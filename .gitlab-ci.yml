@@ -30,13 +30,26 @@
 # run this if building docker containers fails for shell exec
 # usermod -aG docker gitlab-runner
 
+include:
+  - '/.gitlab-ci.cache-stage-dock.yml'
+
 stages:
-  - order1
-  - order2
+  - cache-stage1-dock
+  - cache-stage2-dock
   - b
   - a
   - srv
   - test4
+
+# cache-stage-dock
+#   csd1
+# cache-stage-dock
+#   csd2
+
+# cache-stage1-shell
+# cache-stage2-shell
+
+
 # gitlab-runner exec docker a1
 a1:
   stage: a
@@ -95,6 +108,7 @@ a4:
 
 # have a built test container
 b1:
+  when: manual
   stage: order2
   # image: node:19-alpine3.16
   cache:
@@ -105,7 +119,7 @@ b1:
     when: 'always'
     policy: pull
     paths:
-      - ./variables2.env
+      - ./cache-dep.env
   dependencies:
     - b2
   script:
@@ -116,12 +130,13 @@ b1:
     # - ls "$PWD"
     - ls -la ./
     # - env
-    - cat ./variables2.env
-    - source ./variables2.env
+    - cat ./cache-dep.env
+    - source ./cache-dep.env
     - echo "$PWD"
     - echo $BUILD_ID
 
 b2:
+  when: manual
   stage: order1
   # image: node:19-alpine3.16
   cache:
@@ -132,10 +147,12 @@ b2:
     when: 'always'
     policy: push
     paths:
-      - ./variables2.env
+      - ./cache-dep.env
   variables:
     CI_DEBUG_SERVICES: "true" # show service logs
     FF_NETWORK_PER_BUILD: "true"  # need this for script to talk to services
+  tags:
+    - cache-dep
   script:
     - ls
     - export BUILD_ID=`docker build --quiet -t myapp .`
@@ -149,42 +166,7 @@ b2:
     # - ls "$PWD"
 
 
-# pass a variable from one job to another
-# c1:
-#   stage: order2
-#   # image: node:19-alpine3.16
-#   # artifacts:
-#   cache:
-#     untracked: true 
-#     unprotect: true
-#     # key: "$CI_PIPELINE_ID"
-#     key: "$CI_BUILD_REF_NAME"
-#     when: 'always'
-#     policy: pull
-#     paths:
-#       - ./variables.env
-#   dependencies:
-#     - c2
-#   script:
-#     - cat ./variables.env
 
-
-# # pass a variable from one job to another
-# c2:
-#   stage: order1
-#   # image: node:19-alpine3.16
-#   # artifacts:
-#   cache:
-#     untracked: true 
-#     unprotect: true
-#     # key: "$CI_PIPELINE_ID"
-#     key: "$CI_BUILD_REF_NAME"
-#     when: 'always'
-#     policy: push
-#     paths:
-#       - ./variables.env
-#   script:
-#     - echo "testing456" > ./variables.env
 
 
 # b1a:
