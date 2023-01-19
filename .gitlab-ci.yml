@@ -34,6 +34,7 @@ include:
   - '/.gitlab-ci.cache-stage-dock.yml'
   - '/.gitlab-ci.cache-stage-shell.yml'
   - '/.gitlab-ci.cache-dep-dock.yml'
+  - '/.gitlab-ci.cache-dep-shell.yml'
 
 stages:
 # cache via stage via dock exec
@@ -42,8 +43,11 @@ stages:
 # cache via stage via shell exec
   - cache-stage1-shell
   - cache-stage2-shell
+
 # cache via dep via dock exec
   - cache-dep-dock
+# cache via dep via shell exec
+  - cache-dep-shell
 
 
   - order1
