@@ -6,7 +6,7 @@ cdd-1:
   # artifacts:
   cache:
     untracked: true 
-    unprotect: true
+    # unprotect: true
     # key: "$CI_PIPELINE_ID"
     key: "$CI_BUILD_REF_NAME"
     when: 'always'
@@ -26,7 +26,7 @@ cdd-2:
   # artifacts:
   cache:
     untracked: true 
-    unprotect: true
+    # unprotect: true
     # key: "$CI_PIPELINE_ID"
     key: "$CI_BUILD_REF_NAME"
     when: 'always'
