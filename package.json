@@ -1,0 +1,41 @@
+{
+  "name": "blockhub",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@gitlab.com:pocketmax/blockhub.git",
+  "license": "MIT",
+  "scripts": {
+    "test": "./node_modules/mocha/bin/mocha.js --ignore src/ --watch --retries 3 --bail --timeout 3000 ",
+    "test-driver": "./node_modules/mocha/bin/mocha.js --ignore src/ --watch --retries 3 --bail --timeout 6000 ",
+    "emitter": "nodemon emitter/app.js",
+    "builder": "nodemon builder/app.js",
+    "appender": "nodemon appender/app.js",
+    "exampledon": "nodemon example/don/app.js",
+    "utility": "nodemon utility/app.js",
+    "dev": "nodemon app.js",
+    "prod": "node app.js"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.410.0",
+    "@hapi/hapi": "^21.2.0",
+    "@hapi/joi": "^17.1.1",
+    "amqplib": "^0.10.3",
+    "aws-sdk": "^2.1304.0",
+    "chai": "^4.3.7",
+    "colors": "^1.4.0",
+    "ip-matching": "^2.1.2",
+    "lodash": "^4.17.21",
+    "md5": "^2.3.0",
+    "mimetics": "^0.0.6",
+    "mocha": "^10.2.0",
+    "node-docker-api": "^1.1.22",
+    "node-fetch": "^2.6.0",
+    "nodemon": "^2.0.20",
+    "phonetic": "^0.1.1",
+    "rxjs": "^7.8.0",
+    "rxjs-marbles": "^7.0.1",
+    "xhr2": "^0.2.1",
+    "yargs": "^17.6.2",
+    "yarn": "^1.22.19"
+  }
+}
